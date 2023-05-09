@@ -40,21 +40,12 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm --filter "./packages/**" --filter query --prefer-offline install
+        run: pnpm install
 
-#      - name: Build
-#        uses: nrwl/nx-set-shas@v3
-#        with:
-#          main-branch-name: 'main'
-#      - run: |
-#          echo "BASE: ${{ env.NX_BASE }}"
-#          echo "HEAD: ${{ env.NX_HEAD }}"
       - run: |
-          npm ci
-#          npx nx affected -t build --parallel=3
-          npx nx build
+          pnpx nx build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
+          folder: dist/angular-playground
